@@ -1,0 +1,19 @@
+C++ flags:
+
+-g: include debugging information in compilation. This doesn't enable compiler optimizations, so our code will run slower. This is so we can trace through a debugging mode
+
+-std=c++11: We're using c++11 standard for compiling. We can change to c++14 or c++17.
+
+-Wall: Warn on all things.
+
+-Werror: Turns all warnings into errors, so it will not compile if there is any warnings.
+
+-pedantic-errors: Turns on more warnings to identify bugs.
+
+-fmessage-length=0: Wordwrapping and formatting for error messages, but doesn't seem to work. Not tested
+
+all & clean are build targets. To the right of the colon are any dependencies the project requires.
+
+Under these build targets, is the build instruction. There must be a tab, not spaces before the build instruction. 
+
+All member variables must be initialized by the time the constructor terminates.
