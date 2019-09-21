@@ -2,8 +2,8 @@
  * Name    : unique.cpp
  * Author  : Ryan J. Hartman    
  * Version : 1.1
- * Date    : September 19th, 2019
- * Description : Checks if a string has a unique set of characters with data packing a single unsigned int.
+ * Date    : September 20th, 2019
+ * Description : Checks if a string has a unique set of characters with data packing a single unsigned integer.
  * Pledge : I pledge my honor that I have abided by the Stevens Honor System.
  ******************************************************************************/
 #include <iostream>
