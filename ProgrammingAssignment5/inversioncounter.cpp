@@ -40,14 +40,13 @@ long count_inversions_fast(int array[], int length)
 {
     int *scratch = new int[length];
     long result = mergesort(array, scratch, 0, length - 1);
-    // for (int i = 0; i < length; i++)
-    // {
-    //     cout << " " << array[i];
-    // }
     delete[] scratch;
     return result;
 }
 
+/**
+ * Uses merge sort to count inversions.
+ */
 static long mergesort(int array[], int scratch[], int low, int high)
 {
     long count = 0;
@@ -65,6 +64,9 @@ static long mergesort(int array[], int scratch[], int low, int high)
                 scratch[k] = array[L];
                 L++;
             }
+            // We are taking from the right side, so increment count by
+            // the amount of elements between the middle and the current
+            // left most index:
             else
             {
                 scratch[k] = array[H];
