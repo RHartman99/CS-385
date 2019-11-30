@@ -44,17 +44,14 @@ void display_table(long **const matrix, int num_vertices, const string &label,
         {
             long cell = matrix[i][j];
             if (cell <= long(2.0 * INT_MAX) && cell > max_val)
-            {
                 max_val = matrix[i][j];
-            }
         }
     }
     int max_cell_width = use_letters ? len(max_val, use_letters) : len(max(static_cast<long>(num_vertices), max_val), use_letters);
     cout << ' ';
     for (int j = 0; j < num_vertices; j++)
-    {
         cout << setw(max_cell_width + 1) << static_cast<char>(j + 'A');
-    }
+
     cout << endl;
     for (int i = 0; i < num_vertices; i++)
     {
@@ -63,17 +60,11 @@ void display_table(long **const matrix, int num_vertices, const string &label,
         {
             cout << " " << setw(max_cell_width);
             if (matrix[i][j] > long(2.0 * INT_MAX))
-            {
                 cout << "-";
-            }
             else if (use_letters)
-            {
                 cout << static_cast<char>(matrix[i][j]);
-            }
             else
-            {
                 cout << matrix[i][j];
-            }
         }
         cout << endl;
     }
@@ -169,10 +160,12 @@ bool findPaths(ifstream &matrix_file)
     iss.str(line);
     iss >> num_vertices;
 
+    // Declare matrices needed for Floyd's Algorithm
     long **distance_matrix = new long *[num_vertices];
     long **paths_matrix = new long *[num_vertices];
     long **intermediate_matrix = new long *[num_vertices];
 
+    // Initialize matrices
     for (int i = 0; i < num_vertices; i++)
     {
         distance_matrix[i] = new long[num_vertices];
@@ -185,6 +178,7 @@ bool findPaths(ifstream &matrix_file)
         paths_matrix[i][i] = 0;
     }
 
+    // Build matrices
     while (getline(matrix_file, line))
     {
         sstream.str(line);
@@ -207,6 +201,7 @@ bool findPaths(ifstream &matrix_file)
                     intermediate_matrix[i][j] = (int)k + 'A';
                 }
 
+    // Output
     display_table(distance_matrix, num_vertices, "Distance matrix:");
     display_table(paths_matrix, num_vertices, "Path lengths:");
     display_table(intermediate_matrix, num_vertices, "Intermediate vertices:", true);
@@ -244,10 +239,6 @@ bool findPaths(ifstream &matrix_file)
     delete[] intermediate_matrix;
     return true;
 }
-
-// void floydsAlgorithm(ifstream &matrix_file)
-// {
-// }
 
 int main(int argc, char *argv[])
 {
