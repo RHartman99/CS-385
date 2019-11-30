@@ -17,12 +17,12 @@
 
 using namespace std;
 
-int len(int val, bool isChar)
+long len(long val, bool isChar)
 {
     if (isChar)
         return 1;
 
-    int length = 0;
+    long length = 0;
 
     while (val > 0)
     {
@@ -43,7 +43,7 @@ void display_table(long **const matrix, int num_vertices, const string &label,
         for (int j = 0; j < num_vertices; j++)
         {
             long cell = matrix[i][j];
-            if (cell <= INT_MAX && cell > max_val)
+            if (cell <= long(2.0 * INT_MAX) && cell > max_val)
             {
                 max_val = matrix[i][j];
             }
@@ -62,7 +62,7 @@ void display_table(long **const matrix, int num_vertices, const string &label,
         for (int j = 0; j < num_vertices; j++)
         {
             cout << " " << setw(max_cell_width);
-            if (matrix[i][j] > INT_MAX)
+            if (matrix[i][j] > long(2.0 * INT_MAX))
             {
                 cout << "-";
             }
@@ -140,7 +140,7 @@ bool validate_input(ifstream &matrix_file)
 
 void print_ways(int i, int j, long **paths_matrix, long **intermediate_matrix)
 {
-    if (intermediate_matrix[i][j] < INT_MAX && paths_matrix[i][j] != 0)
+    if (intermediate_matrix[i][j] <= long(2.0 * INT_MAX) && paths_matrix[i][j] != 0)
     {
         print_ways(i, intermediate_matrix[i][j] - 'A', paths_matrix, intermediate_matrix);
         print_ways(intermediate_matrix[i][j] - 'A', j, paths_matrix, intermediate_matrix);
@@ -178,9 +178,9 @@ bool findPaths(ifstream &matrix_file)
         distance_matrix[i] = new long[num_vertices];
         paths_matrix[i] = new long[num_vertices];
         intermediate_matrix[i] = new long[num_vertices];
-        fill_n(distance_matrix[i], num_vertices, (long)INT_MAX + 10);
-        fill_n(paths_matrix[i], num_vertices, (long)INT_MAX + 10);
-        fill_n(intermediate_matrix[i], num_vertices, (long)INT_MAX + 10);
+        fill_n(distance_matrix[i], num_vertices, (long)2.0 * INT_MAX + 1);
+        fill_n(paths_matrix[i], num_vertices, (long)2.0 * INT_MAX + 1);
+        fill_n(intermediate_matrix[i], num_vertices, (long)2.0 * INT_MAX + 1);
         distance_matrix[i][i] = 0;
         paths_matrix[i][i] = 0;
     }
@@ -220,7 +220,7 @@ bool findPaths(ifstream &matrix_file)
                 cout
                     << char(i + 'A') << " -> " << char(j + 'A') << ", distance: " << paths_matrix[i][j] << ", path: " << char(i + 'A');
             }
-            else if (paths_matrix[i][j] <= INT_MAX)
+            else if (paths_matrix[i][j] <= long(2.0 * INT_MAX))
             {
                 cout
                     << char(i + 'A') << " -> " << char(j + 'A') << ", distance: " << paths_matrix[i][j] << ", path: " << char(i + 'A');
